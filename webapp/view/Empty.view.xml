@@ -1,0 +1,9 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="emc.fin.ar.controller.View1"
+>
+    <Page title="This is view1">
+       <Image src="https://tinypng.com/images/social/website.jpg" width="100%" height="100%"></Image>
+    </Page>
+</mvc:View>

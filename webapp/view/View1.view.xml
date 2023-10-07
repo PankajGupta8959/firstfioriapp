@@ -1,0 +1,61 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="emc.fin.ar.controller.View1"
+>
+    <Page title="This is view1">
+        <headerContent>
+            <Button
+                press="onNext"
+                icon="sap-icon://action"
+                tooltip="Share"
+            />
+        </headerContent>
+        <SearchField
+            id="idSearch"
+            search="onSearch"
+            liveChange="onSearch"
+        />
+        <List
+            id="idList"
+            items="{path: '/ProductSet',
+                    sorter: {path: 'NAME'}
+                    }"
+                     growing="true"  growingThreshold="10"  
+            mode="SingleSelectMaster" selectionChange="onSelChange" delete="onItemDelete"
+
+        >
+            <items>
+                <ObjectListItem
+                    title="{NAME}"
+                    intro="{SUPPLIER_NAME}"
+                    number="{PRICE}"
+                    numberUnit="{CURRENCY_CODE}"
+                    icon="sap-icon://product"
+                />
+                <!-- <DisplayListItem label="News Paper" value="It's Gives the best news on Morning
+                Paper" /><StandardListItem
+                icon="https://w7.pngwing.com/pngs/973/255/png-transparent-red-apple-apple-fruit-apple-natural-foods-food-grocery-store-thumbnail.png"
+                tooltip="Apple Image" title="Apple" description="This is very Healthy fruit "
+                /><InputListItem><content><HBox><Label class="sapUiSmallMarginTop" text="You can
+                input as per your choice" /><Input width="30%"
+                /></HBox></content></InputListItem><ObjectListItem
+                icon="https://cdn.bollywoodmdb.com/fit-in/600x600/post/KapilSharma_1679759924532.jpg"
+                intro="Kapil Sharma " title="He is a very big comedian" number="500000"
+                numberUnit="per show" /><CustomListItem><content><HBox><Label
+                class="sapUiSmallMarginTop" text="Do you want COD" /><Switch
+                /></HBox></content></CustomListItem><FeedListItem sender="PM Modi" info="Prime
+                minister" text="Hello, Pankaj Boss" timestamp="20:10:28"
+                icon="https://upload.wikimedia.org/wikipedia/commons/0/0e/Prime_Minister_of_India_Narendra_Modi.jpg"
+                /><ActionListItem text="Click it"></ActionListItem> -->
+            </items>
+        </List>
+        <!-- <Button text="GotoNext" press="onNext" /> -->
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button  press="onAdd" type="Emphasized" icon="sap-icon://add" text="Add"></Button>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

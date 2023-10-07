@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:DataServices m:DataServiceVersion="2.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+        <Schema Namespace="ZMAY_ODATA_SRV" xml:lang="en" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Product" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+                <Key>
+                    <PropertyRef Name="PRODUCT_ID"/>
+                </Key>
+                <Property Name="PRODUCT_ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="TYPE_CODE" Type="Edm.String" Nullable="false"/>
+                <Property Name="CATEGORY" Type="Edm.String" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" Nullable="false"/>
+                <Property Name="SUPPLIER_ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="SUPPLIER_NAME" Type="Edm.String"/>
+                <Property Name="TAX_TARIF_CODE" Type="Edm.String" Nullable="false"/>
+                <Property Name="MEASURE_UNIT" Type="Edm.String" Nullable="false"/>
+                <Property Name="WEIGHT_MEASURE" Type="Edm.String" Nullable="false"/>
+                <Property Name="PRICE" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="2"/>
+                <Property Name="CURRENCY_CODE" Type="Edm.String" Nullable="false"/>
+                <NavigationProperty Name="To_Supplier" Relationship="ZMAY_ODATA_SRV.Asso_product_supplier" FromRole="FromRole_Asso_product_supplier" ToRole="ToRole_Asso_product_supplier"/>
+            </EntityType>
+            <EntityType Name="Supplier" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+                <Key>
+                    <PropertyRef Name="BP_ID"/>
+                </Key>
+                <Property Name="BP_ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="BP_ROLE" Type="Edm.String" Nullable="false"/>
+                <Property Name="EMAIL_ADDRESS" Type="Edm.String" Nullable="false"/>
+                <Property Name="PHONE_NUMBER" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="ProdPic" m:HasStream="true" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+                <Key>
+                    <PropertyRef Name="PRODUCT_ID"/>
+                </Key>
+                <Property Name="MIME_TYPE" Type="Edm.String" Nullable="false"/>
+                <Property Name="PRODUCT_PIC" Type="Edm.String" Nullable="false"/>
+                <Property Name="PRODUCT_ID" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <Association Name="Asso_product_supplier" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+                <End Type="ZMAY_ODATA_SRV.Product" Multiplicity="1" Role="FromRole_Asso_product_supplier"/>
+                <End Type="ZMAY_ODATA_SRV.Supplier" Multiplicity="1" Role="ToRole_Asso_product_supplier"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Asso_product_supplier">
+                        <PropertyRef Name="PRODUCT_ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Asso_product_supplier">
+                        <PropertyRef Name="BP_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZMAY_ODATA_SRV" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SupplierSet" EntityType="ZMAY_ODATA_SRV.Supplier" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData"/>
+                <EntitySet Name="ProdPicSet" EntityType="ZMAY_ODATA_SRV.ProdPic" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData"/>
+                <EntitySet Name="ProductSet" EntityType="ZMAY_ODATA_SRV.Product" sap:searchable="true" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData"/>
+                <AssociationSet Name="Asso_product_supplierSet" Association="ZMAY_ODATA_SRV.Asso_product_supplier" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+                    <End EntitySet="ProductSet" Role="FromRole_Asso_product_supplier"/>
+                    <End EntitySet="SupplierSet" Role="ToRole_Asso_product_supplier"/>
+                </AssociationSet>
+                <FunctionImport Name="GetMostExpensiveProduct" ReturnType="ZMAY_ODATA_SRV.Product" EntitySet="ProductSet" m:HttpMethod="GET">
+                    <Parameter Name="I_CATEGORY" Type="Edm.String" Mode="In">
+                        <Documentation>
+                            <Summary>I_CATEGORY</Summary>
+                            <LongDescription/>
+                        </Documentation>
+                    </Parameter>
+                </FunctionImport>
+                <FunctionImport Name="GetMostCheapestProduct" ReturnType="ZMAY_ODATA_SRV.Product" EntitySet="ProductSet" m:HttpMethod="GET"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://eccehp7.4vm.com:8073/sap/opu/odata/sap/ZMAY_ODATA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://eccehp7.4vm.com:8073/sap/opu/odata/sap/ZMAY_ODATA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

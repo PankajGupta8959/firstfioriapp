@@ -1,0 +1,127 @@
+{
+    "_version": "1.55.0",
+    "sap.app": {
+        "id": "emc.fin.ar",
+        "type": "application",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "pankajService": {
+                "type": "OData",
+                "uri": "/sap/opu/odata/sap/ZMAY_ODATA_SRV/",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "deviceTypes": {
+            "phone": true,
+            "tablet": true,
+            "desktop": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize",
+            "sap_fiori_3_dark"
+        ]
+    },
+    "sap.ui5": {
+        "library": {
+            "css": "css/style.css"
+        },
+        "rootView": {
+            "viewName": "emc.fin.ar.view.app",
+            "type": "XML",
+            "id": "idAppView"
+        },
+        "routing": {
+            "config": {
+                "viewType": "XML",
+                "viewPath": "emc.fin.ar.view",
+                "controlId": "appCon",
+                "clearControlAggregation": true
+            },
+            "routes": [
+                {
+                    "name": "master",
+                    "pattern": "",
+                    "target": [
+                        "joe",
+                        "rush"
+                    ]
+                },
+                {
+                    "name": "details",
+                    "pattern": "product/{pid}",
+                    "target": [
+                        "joe",
+                        "modi"
+                    ]
+                },
+                {
+                    "name": "add",
+                    "pattern": "addProduct",
+                    "target": [
+                        "joe",
+                        "putin"
+                    ]
+                }
+            ],
+            "targets": {
+                "joe": {
+                    "viewName": "View1",
+                    "id": "idView1",
+                    "controlAggregation": "masterPages"
+                },
+                "rush": {
+                    "viewName": "Empty",
+                    "id": "idEmpty",
+                    "controlAggregation": "detailPages"
+                },
+                "modi": {
+                    "viewName": "View2",
+                    "id": "idView2",
+                    "controlAggregation": "detailPages"
+                },
+                "putin": {
+                    "viewName": "Add",
+                    "id": "idAdd",
+                    "controlAggregation": "detailPages"
+                }
+            }
+        },
+        "dependencies": {
+            "miniUI5Version": "1.114.0",
+            "libs": {
+                "sap.m": {
+                    "miniVersion": "1.114.0"
+                },
+                "sap.ui.layout": {
+                    "miniVersion": "1.114.0"
+                }
+            }
+        },
+        "models": {
+            "": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "dataSource": "pankajService"
+            },
+            "client": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "mockdata/fruits.json"
+            },
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleUrl": "i18n/i18n.properties"
+                }
+            }
+        }
+    }
+}

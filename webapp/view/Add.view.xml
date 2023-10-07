@@ -1,0 +1,47 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m" controllerName="emc.fin.ar.controller.Add">
+    <Page showFooter="true" showHeader="true" id="idAdd" title="Add Product Details">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm id="SimpleFormChange354wide" editable="true" layout="ResponsiveGridLayout" title="Enter New Product Details" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                <f:content>
+                    <Label text="Product ID" />
+                    <Input id="name" value="{prod>/prodData/PRODUCT_ID}" submit="onEnter"/>
+                    <Label text="Product Name / Description" />
+                    <Input value="{prod>/prodData/NAME}">
+                    </Input>
+                    <Input value="{prod>/prodData/DESCRIPTION}">
+                        <layoutData>
+                            <l:GridData span="XL1 L2 M2 S4" />
+                        </layoutData>
+                    </Input>
+                    <Label text="Price / Currency" />
+                    <Input value="{prod>/prodData/PRICE}" type="Number">
+                        <layoutData>
+                            <l:GridData span="XL1 L2 M2 S4" />
+                        </layoutData>
+                    </Input>
+                    <Input value="{prod>/prodData/CURRENCY_CODE}" />
+                    <Label text="Category" />
+                    <Select id="country" selectedKey="{prod>/prodData/CATEGORY}">
+                        <items>
+                            <core:Item text="NoteBooks" key="NoteBooks"/>
+                            <core:Item text="Mice" key="Mice"/>
+                            <core:Item text="Projectors" key="Projectors"/>
+                        </items>
+                    </Select>
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Save" press="onSave" icon="sap-icon://save"></Button>
+                <Button text="Clear" press="onClear" icon="sap-icon://cancel"></Button>
+            </Toolbar>
+        </footer>
+
+    </Page>
+</mvc:View>

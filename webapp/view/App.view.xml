@@ -1,0 +1,4 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="emc.fin.ar.controller.Add">
+    <SplitApp id="appCon">
+    </SplitApp>
+</mvc:View>
